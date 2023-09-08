@@ -34,4 +34,41 @@ test('gets inventory fromplayer or returns false', () => {
     expect(player.getInventory()).toEqual(false);
 });
 
+test( 'gets player health value', () => {
+    const player = new Player('Dave');
+
+    expect(player.getHealth()).toEqual(expect.stringContainer(player.health.toString()));
+});
+
+test( 'checks if player is alive or dead', () => {
+    const player = new Player('Dave');
+
+    expect(player.IsAlive()).toBeTruthy();
+
+    player.health = 0;
+
+    expect(player.IsAlive()).toBeFalsy();
+});
+
+test('subtract from players health', () => {
+    const player = new Player('Dave');
+    const oldHealth = player.health;
+
+    player.reducedHealth(5);
+    
+    expect(player.health).toBe(oldHealth - 5);
+
+    player.reducedHealth(99999);
+
+    expect(player.health).toBe(0);
+});
+
+test("gets players attack value", () => {
+    const player = new Player('Dave');
+    player.strength = 10;
+
+    expect(player.getAttackValue()).toBeGreaterThanOrEqual(5);
+    expect(player.getAttackValue()).toBeLessThanOrEqual(15);
+});
+
 console.log(new Potion());
